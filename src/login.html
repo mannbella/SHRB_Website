@@ -11,8 +11,8 @@
   </h1>
   <div class="container">
     <div>
-        <label for="email" id="email">Email</label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <label for="school" id="email">Email</label>
+        <input type="text" placeholder="Enter School Name" name="school" required>
     </div>
 
     <div>
@@ -21,88 +21,51 @@
     </div>
 
     <div>
-        <label for="apikey" id="apikey">API Key</label>
-        <input type="text" placeholder="Enter API Key" name="apikey" required>
+        <button type="button" id="loginButton">Login</button>
     </div>
-
-    <div>
-        <button type="submit" id="submitButton">Login</button>
-    </div>
-
-    <script>
-        const button = document.getElementById("submitButton");
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const apikeyInput = document.getElementById("apikey");
-
-        function validateEmail(email) {
-            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            return re.text(String(email).toLowerCase());
-        }
-
-        async function validateApiKey(key) {
-            const testEndpoint = 'https://api.example.com/v1/user/me'; // CHANGE TO CORRECT ENDPOINT
-
-            try {
-                const response = await fetch(testEndpoint, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${key}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                return response.ok;
-            } catch (error) {
-                console.error('network error during validation:', error);
-                return false;
-            }
-        }
-
-        button.addEventListener("click", async function() {
-            const email = emailInput.value.trim();
-            const passwrod = passwrodInput.value.trim();
-            const apiKey = apikeyInput.value.trim();
-
-            statusMessage.textContent = "Validating...";
-        
-            if(!validateEmail(email)) {
-                statusMessage.textConent = "Error: enter valid email";
-                statusMessage.style.color = "red";
-                return;
-            }
-
-            if(password.lenth < 8) {
-                statusMessage.textConent = "Error: password must be 8 letters";
-                statusMessage.style.color = "red";
-                return;
-            }
-
-            if(apiKey.length == 0) {
-                statusMessage.textConent = "Error: enter API key";
-                statusMessage.style.color = "red";
-                return;
-            }
-
-            const isKeyValid = await validateApiKey(apiKey);
-
-            if(isKeyValid) {
-                statusMessage.textContent = "valid api key";
-                statusMessage.style.color = "green";
-
-                window.location.href = "index.html";
-            } else {
-                statusMessage.textContent = "invalid api key";
-                statusMessage.style.color = "red";
-            }
-            
-
-            alert("you submitted");
-        });
-    </script>
 
     <label>
         <input type="checkbox" checked="checked" name="remember">Remember me
     </label>
+
+    <script>
+        const loginButton = document.getElementById("loginButton");
+        const schoolInput = document.getElementById("school");
+        const passwordInput = document.getElementById("password");
+
+        loginButton.addEventListener("click", async function() {
+            const school = schoolInput.value.trim();
+            const password = passwordInput.value.trim();
+            let schoolNames = ['Bellview', 'Batcheller', 'Briscoe', 'Church', 'Montessori', 'Ruch', 'ScienceWorks']
+            let found = false;
+
+            statusMessage.textContent = "Validating...";
+        
+            if(!schoolNames.includes(school) || !password) {
+                statusMessage.textConent = "Error: school name incorrect";
+                statusMessage.style.color = "red";
+                return;
+            }
+
+            if(password != 'oberon' || !password) {
+                statusMessage.textConent = "Error: password incorrect";
+                statusMessage.style.color = "red";
+                return;
+            }
+
+            if(isPasswordValid && isSchoolValid) {
+                statusMessage.textContent = "login successful";
+                statusMessage.style.color = "green";
+
+                window.location.href = "index.html";
+            } else {
+                statusMessage.textContent = "login failed";
+                statusMessage.style.color = "red";
+            }
+
+            alert("you submitted");
+        });
+    </script>
   </div>
 </body>
 </html>

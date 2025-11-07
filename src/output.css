@@ -103,9 +103,21 @@
     font-variation-settings: inherit;
     letter-spacing: inherit;
     color: inherit;
-    border-radius: 0;
+    border-radius: 3;
     background-color: transparent;
-    opacity: 1;
+    opacity: 4;
+  }
+  #loginButton{
+    background-color: #007bff; 
+    color: white; 
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #loginButton:hover {
+    background-color: #0056b3;
   }
   :where(select:is([multiple], [size])) optgroup {
     font-weight: bolder;
