@@ -11,61 +11,77 @@
   </h1>
   <div class="container">
     <div>
-        <label for="school" id="email">Email</label>
-        <input type="text" placeholder="Enter School Name" name="school" required>
+        <label for="school">School Name</label>
+        <input type="text" placeholder="Enter School Name" name="school" id="school" required>
     </div>
 
     <div>
-        <label for="password" id="password">Password</label>
-        <input type="text" placeholder="Enter Password" name="password" required>
+        <label for="password">Password</label>
+        <input type="text" placeholder="Enter Password" name="password" id="password" required>
     </div>
 
     <div>
-        <button type="button" id="loginButton">Login</button>
+        <button type="submit" id="loginButton">Login</button>
     </div>
 
     <label>
-        <input type="checkbox" checked="checked" name="remember">Remember me
+        <input type="checkbox" checked="checked" name="remember" id="rememberMe">Remember me
     </label>
 
-    <script>
-        const loginButton = document.getElementById("loginButton");
-        const schoolInput = document.getElementById("school");
-        const passwordInput = document.getElementById("password");
+    <p id="statusMessage" style="color: red;"></p>
+  </div>
 
-        loginButton.addEventListener("click", async function() {
-            const school = schoolInput.value.trim();
-            const password = passwordInput.value.trim();
-            let schoolNames = ['Bellview', 'Batcheller', 'Briscoe', 'Church', 'Montessori', 'Ruch', 'ScienceWorks']
-            let found = false;
+  <script>
+    const loginButton = document.getElementById("loginButton");
+    const schoolInput = document.getElementById("school");
+    const passwordInput = document.getElementById("password");
+    const checkbox = document.getElementById("rememberMe");
 
-            statusMessage.textContent = "Validating...";
-        
+    loginButton.addEventListener("click", async function(event) {
+        event.preventDefault();
+
+        const school = schoolInput.value.trim();
+        const password = passwordInput.value.trim();
+        let schoolNames = ['Bellview', 'Batcheller', 'Briscoe', 'Church', 'Montessori', 'Ruch', 'ScienceWorks']
+        let found = false;
+    
+        function isSchoolValid() {
             if(!schoolNames.includes(school) || !password) {
                 statusMessage.textConent = "Error: school name incorrect";
                 statusMessage.style.color = "red";
                 return;
             }
+        }
 
+        function isPasswordValid() {
             if(password != 'oberon' || !password) {
                 statusMessage.textConent = "Error: password incorrect";
                 statusMessage.style.color = "red";
                 return;
             }
+        }
 
-            if(isPasswordValid && isSchoolValid) {
-                statusMessage.textContent = "login successful";
-                statusMessage.style.color = "green";
+        if(checkbox.checked) {
+            const userSession = {
+                school: school,
+                isLoggedIn: true
+            };
 
-                window.location.href = "index.html";
-            } else {
-                statusMessage.textContent = "login failed";
-                statusMessage.style.color = "red";
-            }
+            localStorage.setItem('userSession', JSON.stringify(userSession));
+        }
 
-            alert("you submitted");
-        });
-    </script>
-  </div>
+        if(isPasswordValid && isSchoolValid) {
+            statusMessage.textContent = "login successful";
+            statusMessage.style.color = "green";
+
+            window.location.href = "index.html";
+        } else {
+            statusMessage.textContent = "login failed";
+            statusMessage.style.color = "red";
+        }
+
+        alert("you submitted");
+    });
+  </script>
 </body>
 </html>
