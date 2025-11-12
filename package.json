@@ -6,6 +6,6 @@
   "name": "my-project",
   "version": "1.0.0",
   "scripts": {
-    "watch": "npx tailwindcss -i ./src/input.css -o ./output.css --watch"
+    "watch": "npx tailwindcss -i ./src/input.css -o ./output.css --content \"./*.html\" --watch"
   }
 }

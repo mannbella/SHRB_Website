@@ -7,13 +7,19 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-800: oklch(27.8% 0.033 256.848);
     --color-black: #000;
     --color-white: #fff;
+    --spacing: 0.25rem;
     --container-3xs: 16rem;
     --container-xs: 20rem;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-bold: 700;
+    --radius-md: 0.375rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -167,32 +173,20 @@
   }
 }
 @layer utilities {
-  .visible {
-    visibility: visible;
-  }
-  .container {
-    width: 100%;
-    @media (width >= 40rem) {
-      max-width: 40rem;
-    }
-    @media (width >= 48rem) {
-      max-width: 48rem;
-    }
-    @media (width >= 64rem) {
-      max-width: 64rem;
-    }
-    @media (width >= 80rem) {
-      max-width: 80rem;
-    }
-    @media (width >= 96rem) {
-      max-width: 96rem;
-    }
-  }
   .mx-auto {
     margin-inline: auto;
   }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .block {
+    display: block;
+  }
   .flex {
     display: flex;
+  }
+  .hidden {
+    display: none;
   }
   .table {
     display: table;
@@ -202,9 +196,6 @@
   }
   .max-w-xs {
     max-width: var(--container-xs);
-  }
-  .basis-3xs {
-    flex-basis: var(--container-3xs);
   }
   .border-collapse {
     border-collapse: collapse;
@@ -224,15 +215,39 @@
   .items-center {
     align-items: center;
   }
+  .justify-center {
+    justify-content: center;
+  }
   .rounded-\[5px\] {
     border-radius: 5px;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
   }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-gray-800 {
+    background-color: var(--color-gray-800);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
   .px-\[15px\] {
     padding-inline: 15px;
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
   }
   .py-\[10px\] {
     padding-block: 10px;
@@ -243,6 +258,10 @@
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
@@ -261,13 +280,6 @@
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
-  .hover\:bg-\[\#005\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #005;
-      }
-    }
-  }
   .hover\:bg-\[\#0056b3\] {
     &:hover {
       @media (hover: hover) {
@@ -275,10 +287,10 @@
       }
     }
   }
-  .hover\:bg-\[\#\] {
+  .hover\:bg-gray-700 {
     &:hover {
       @media (hover: hover) {
-        background-color: #;
+        background-color: var(--color-gray-700);
       }
     }
   }
@@ -296,6 +308,9 @@
 }
 #loginButton:hover {
   background-color: #0056b3;
+}
+.p2, .password {
+  padding: 15px;
 }
 @property --tw-border-style {
   syntax: "*";
