@@ -1,1 +1,29 @@
 @import "tailwindcss";
+@layer base;
+@layer feComponentTransfer;
+
+#loginButton {
+  /* Give it a visible background */
+  background-color: #007bff; 
+  
+  /* Make the text easy to read */
+  color: white; 
+  
+  /* Add some padding so it's not tiny */
+  padding: 10px 15px;
+  
+  /* Remove the default border and add a radius */
+  border: none;
+  border-radius: 5px; /* Notice the 'px' units! */
+  
+  /* Make the mouse cursor change on hover */
+  cursor: pointer;
+  
+  /* Make it bold */
+  font-weight: bold;
+}
+
+/* (Optional) Add a hover effect */
+#loginButton:hover {
+  background-color: #0056b3;
+}

@@ -6,22 +6,25 @@
   <link href="./output.css" rel="stylesheet">
 </head>
 <body>
-  <h1 class="text-3xl font-bold">
+  <header>
+    <p id="headerNote" style="color: orange">shrb lab website</p>
+  </header>
+  <h1 class="text-3xl font-bold text-center" id="loginLabel">
     Login Page
   </h1>
-  <div class="container">
+  <div class="loginContainer w-full max-w-xs mx-auto flex flex-col items-center">
     <div>
-        <label for="school">School Name</label>
+        <label for="school" id="p1">School Name</label>
         <input type="text" placeholder="Enter School Name" name="school" id="school" required>
     </div>
 
     <div>
-        <label for="password">Password</label>
-        <input type="text" placeholder="Enter Password" name="password" id="password" required>
+        <label for="password" id="p2">Password</label>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required>
     </div>
 
-    <div>
-        <button type="submit" id="loginButton">Login</button>
+    <div class="flex flex-row">
+        <button type="submit" id="loginButton" class="bi-[#007bff] text-black font-fold py-[10px] px-[15px] rounded-[5px] cursor-pointer hover:bg-[#0056b3]">Login</button>
     </div>
 
     <label>
@@ -30,6 +33,9 @@
 
     <p id="statusMessage" style="color: red;"></p>
   </div>
+  <footer>
+    <p id="footerNote" style="color: orange"> this super cool website was made by bella</p>
+  </footer>
 
   <script>
     const loginButton = document.getElementById("loginButton");
@@ -49,16 +55,18 @@
             if(!schoolNames.includes(school) || !password) {
                 statusMessage.textConent = "Error: school name incorrect";
                 statusMessage.style.color = "red";
-                return;
+                return false;
             }
+            return true;
         }
 
         function isPasswordValid() {
             if(password != 'oberon' || !password) {
                 statusMessage.textConent = "Error: password incorrect";
                 statusMessage.style.color = "red";
-                return;
+                return false;
             }
+            return true;
         }
 
         if(checkbox.checked) {
@@ -70,17 +78,12 @@
             localStorage.setItem('userSession', JSON.stringify(userSession));
         }
 
-        if(isPasswordValid && isSchoolValid) {
-            statusMessage.textContent = "login successful";
-            statusMessage.style.color = "green";
-
+        if(isPasswordValid() && isSchoolValid()) {
+            alert("login successful");
             window.location.href = "index.html";
         } else {
-            statusMessage.textContent = "login failed";
-            statusMessage.style.color = "red";
+            alert("login failed");
         }
-
-        alert("you submitted");
     });
   </script>
 </body>
